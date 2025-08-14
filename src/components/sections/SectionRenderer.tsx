@@ -1,5 +1,6 @@
 'use client';
 
+import React, { memo, useCallback } from 'react';
 import { SectionData } from '@/types';
 import { HeaderSection } from './HeaderSection';
 import { HeroSection } from './HeroSection';
@@ -14,17 +15,17 @@ interface SectionRendererProps {
   onClick?: () => void;
 }
 
-export function SectionRenderer({ 
+export const SectionRenderer = memo(function SectionRenderer({ 
   section, 
   isSelected = false, 
   isPreviewMode = false, 
   onClick 
 }: SectionRendererProps) {
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     if (!isPreviewMode && onClick) {
       onClick();
     }
-  };
+  }, [isPreviewMode, onClick]);
 
   const sectionProps = {
     section,
@@ -64,4 +65,4 @@ export function SectionRenderer({
       {sectionElement}
     </div>
   );
-}
+});

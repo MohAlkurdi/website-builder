@@ -1,5 +1,6 @@
 'use client';
 
+import React, { memo, useCallback } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { useBuilderStore } from '@/store/builderStore';
 import { SectionRenderer } from '@/components/sections/SectionRenderer';
@@ -9,7 +10,7 @@ interface PreviewAreaProps {
   className?: string;
 }
 
-export function PreviewArea({ className = '' }: PreviewAreaProps) {
+export const PreviewArea = memo(function PreviewArea({ className = '' }: PreviewAreaProps) {
   const {
     currentPage,
     selectedSectionId,
@@ -19,7 +20,7 @@ export function PreviewArea({ className = '' }: PreviewAreaProps) {
     setDragging,
   } = useBuilderStore();
 
-  const handleDragEnd = (result: DragResult) => {
+  const handleDragEnd = useCallback((result: DragResult) => {
     setDragging(false);
     
     if (!result.destination) {
@@ -29,17 +30,17 @@ export function PreviewArea({ className = '' }: PreviewAreaProps) {
     if (result.source.index !== result.destination.index) {
       reorderSections(result.source.index, result.destination.index);
     }
-  };
+  }, [setDragging, reorderSections]);
 
-  const handleDragStart = () => {
+  const handleDragStart = useCallback(() => {
     setDragging(true);
-  };
+  }, [setDragging]);
 
-  const handleSectionClick = (sectionId: string) => {
+  const handleSectionClick = useCallback((sectionId: string) => {
     if (!isPreviewMode) {
       selectSection(sectionId);
     }
-  };
+  }, [isPreviewMode, selectSection]);
 
   if (currentPage.sections.length === 0) {
     return (
@@ -121,4 +122,4 @@ export function PreviewArea({ className = '' }: PreviewAreaProps) {
       </DragDropContext>
     </div>
   );
-}
+});

@@ -65,13 +65,14 @@ export function SectionLibrary({ className = '' }: SectionLibraryProps) {
       </div>
       
       <div className="p-4 space-y-3">
-        {sectionTemplates.map((template) => (
+        {sectionTemplates.map((template, index) => (
           <div
             key={template.id}
-            className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-sm transition-all duration-200"
+            className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-md hover:scale-[1.02] transition-all duration-200 animate-slide-in"
+            style={{ animationDelay: `${index * 50}ms` }}
           >
             <div className="flex items-start space-x-3">
-              <div className="flex-shrink-0 p-2 bg-blue-50 rounded-md text-blue-600">
+              <div className="flex-shrink-0 p-2 bg-blue-50 rounded-md text-blue-600 transition-colors duration-200 group-hover:bg-blue-100">
                 {getIconComponent(template.icon)}
               </div>
               <div className="flex-1 min-w-0">
@@ -84,7 +85,7 @@ export function SectionLibrary({ className = '' }: SectionLibraryProps) {
                 <Button
                   size="sm"
                   onClick={() => handleAddSection(template)}
-                  className="w-full"
+                  className="w-full transform hover:scale-105 transition-transform duration-150"
                 >
                   Add Section
                 </Button>

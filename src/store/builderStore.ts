@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
+import { shallow } from 'zustand/shallow';
 import { SectionData, PageConfiguration, BuilderState, SectionTemplate } from '@/types';
 
 interface BuilderStore extends BuilderState {
