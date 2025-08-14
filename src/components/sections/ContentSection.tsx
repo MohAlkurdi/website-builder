@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { SectionData } from '@/types';
-import Image from 'next/image';
+import { SectionData } from "@/types";
+import Image from "next/image";
 
 interface ContentSectionProps {
   section: SectionData;
@@ -15,8 +15,8 @@ export function ContentSection({ section }: ContentSectionProps) {
     <section
       className="w-full py-16 px-6"
       style={{
-        backgroundColor: section.backgroundColor || '#ffffff',
-        color: section.textColor || '#374151',
+        backgroundColor: section.backgroundColor || "#ffffff",
+        color: section.textColor || "#374151",
       }}
     >
       <div className="max-w-7xl mx-auto">
@@ -33,9 +33,7 @@ export function ContentSection({ section }: ContentSectionProps) {
             </div>
           )}
           <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold">
-              {section.title}
-            </h2>
+            <h2 className="text-3xl lg:text-4xl font-bold">{section.title}</h2>
             {section.description && (
               <p className="text-lg leading-relaxed opacity-90">
                 {section.description}

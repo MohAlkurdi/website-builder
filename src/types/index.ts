@@ -1,6 +1,6 @@
 export interface SectionData {
   id: string;
-  type: 'header' | 'hero' | 'footer' | 'content' | 'cta';
+  type: "header" | "hero" | "footer" | "content" | "cta";
   title: string;
   description?: string;
   imageUrl?: string;
@@ -27,11 +27,11 @@ export interface BuilderState {
 
 export interface SectionTemplate {
   id: string;
-  type: SectionData['type'];
+  type: SectionData["type"];
   name: string;
   description: string;
   icon: string;
-  defaultData: Omit<SectionData, 'id'>;
+  defaultData: Omit<SectionData, "id">;
 }
 
 export interface DragResult {

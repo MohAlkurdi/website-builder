@@ -1,7 +1,12 @@
-import { create } from 'zustand';
-import { subscribeWithSelector } from 'zustand/middleware';
-import { shallow } from 'zustand/shallow';
-import { SectionData, PageConfiguration, BuilderState, SectionTemplate } from '@/types';
+import { create } from "zustand";
+import { subscribeWithSelector } from "zustand/middleware";
+import {
+  SectionData,
+  PageConfiguration,
+  BuilderState,
+  SectionTemplate,
+} from "@/types";
+import { generateId } from "@/lib/generateId";
 
 interface BuilderStore extends BuilderState {
   addSection: (template: SectionTemplate) => void;
@@ -16,27 +21,40 @@ interface BuilderStore extends BuilderState {
   resetPage: () => void;
 }
 
-const createDefaultPage = (): PageConfiguration => ({
-  id: crypto.randomUUID(),
-  name: 'Untitled Page',
-  sections: [],
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
-});
+const createDefaultPage = (): PageConfiguration => {
+  const now = new Date().toISOString();
+  return {
+    id: generateId(),
+    name: "Untitled Page",
+    sections: [],
+    createdAt: now,
+    updatedAt: now,
+  };
+};
+
+const initialState = {
+  currentPage: {
+    id: "initial",
+    name: "Untitled Page",
+    sections: [],
+    createdAt: "",
+    updatedAt: "",
+  },
+  selectedSectionId: null,
+  isPreviewMode: false,
+  isDragging: false,
+};
 
 export const useBuilderStore = create<BuilderStore>()(
   subscribeWithSelector((set, get) => ({
-    currentPage: createDefaultPage(),
-    selectedSectionId: null,
-    isPreviewMode: false,
-    isDragging: false,
+    ...initialState,
 
     addSection: (template) => {
       const newSection: SectionData = {
         ...template.defaultData,
-        id: crypto.randomUUID(),
+        id: generateId(),
       };
-      
+
       set((state) => ({
         currentPage: {
           ...state.currentPage,
@@ -63,10 +81,13 @@ export const useBuilderStore = create<BuilderStore>()(
       set((state) => ({
         currentPage: {
           ...state.currentPage,
-          sections: state.currentPage.sections.filter((section) => section.id !== id),
+          sections: state.currentPage.sections.filter(
+            (section) => section.id !== id
+          ),
           updatedAt: new Date().toISOString(),
         },
-        selectedSectionId: state.selectedSectionId === id ? null : state.selectedSectionId,
+        selectedSectionId:
+          state.selectedSectionId === id ? null : state.selectedSectionId,
       }));
     },
 
@@ -117,8 +138,8 @@ export const useBuilderStore = create<BuilderStore>()(
           selectedSectionId: null,
         });
       } catch (error) {
-        console.error('Failed to import configuration:', error);
-        throw new Error('Invalid configuration format');
+        console.error("Failed to import configuration:", error);
+        throw new Error("Invalid configuration format");
       }
     },
 

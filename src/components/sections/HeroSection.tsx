@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { SectionData } from '@/types';
-import { Button } from '@/components/ui/Button';
-import Image from 'next/image';
+import { SectionData } from "@/types";
+import { Button } from "@/components/ui/Button";
+import Image from "next/image";
 
 interface HeroSectionProps {
   section: SectionData;
@@ -16,8 +16,8 @@ export function HeroSection({ section }: HeroSectionProps) {
     <section
       className="w-full py-20 px-6"
       style={{
-        backgroundColor: section.backgroundColor || '#f8fafc',
-        color: section.textColor || '#1e293b',
+        backgroundColor: section.backgroundColor || "#f8fafc",
+        color: section.textColor || "#1e293b",
       }}
     >
       <div className="max-w-7xl mx-auto">

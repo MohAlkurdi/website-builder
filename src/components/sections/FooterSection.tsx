@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { SectionData } from '@/types';
+import { SectionData } from "@/types";
 
 interface FooterSectionProps {
   section: SectionData;
@@ -10,16 +10,16 @@ interface FooterSectionProps {
 }
 
 export function FooterSection({ section }: FooterSectionProps) {
-  const footerLinks = section.description?.split(' | ') || [];
-  const copyrightText = footerLinks[0] || '';
+  const footerLinks = section.description?.split(" | ") || [];
+  const copyrightText = footerLinks[0] || "";
   const links = footerLinks.slice(1);
 
   return (
     <footer
       className="w-full py-12 px-6"
       style={{
-        backgroundColor: section.backgroundColor || '#1f2937',
-        color: section.textColor || '#ffffff',
+        backgroundColor: section.backgroundColor || "#1f2937",
+        color: section.textColor || "#ffffff",
       }}
     >
       <div className="max-w-7xl mx-auto">
@@ -31,13 +31,22 @@ export function FooterSection({ section }: FooterSectionProps) {
           <div className="space-y-4">
             <h4 className="font-semibold">Quick Links</h4>
             <div className="space-y-2">
-              <a href="#" className="block text-sm opacity-80 hover:opacity-100 transition-opacity">
+              <a
+                href="#"
+                className="block text-sm opacity-80 hover:opacity-100 transition-opacity"
+              >
                 About Us
               </a>
-              <a href="#" className="block text-sm opacity-80 hover:opacity-100 transition-opacity">
+              <a
+                href="#"
+                className="block text-sm opacity-80 hover:opacity-100 transition-opacity"
+              >
                 Services
               </a>
-              <a href="#" className="block text-sm opacity-80 hover:opacity-100 transition-opacity">
+              <a
+                href="#"
+                className="block text-sm opacity-80 hover:opacity-100 transition-opacity"
+              >
                 Contact
               </a>
             </div>
